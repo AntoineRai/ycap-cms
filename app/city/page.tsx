@@ -1,8 +1,9 @@
 import React from "react";
-import { CirclePlus, LogOut } from "lucide-react";
+import { CirclePlus, Link, LogOut } from "lucide-react";
 import CityCard from "@/components/CityCard";
 
 export default function Page() {
+
   return (
     <main className="flex flex-col h-screen items-center justify-center">
       <div className="w-4/5 flex flex-row-reverse px-4">
@@ -21,7 +22,6 @@ export default function Page() {
             </div>
           </div>
           <div className="flex flex-col flex-wrap gap-2 h-4/5">
-            <CityCard city="Lille" lat="47.6193757" long="6.1529374" />
             <CityCard city="Lille" lat="47.6193757" long="6.1529374" />
             <CityCard city="Lille" lat="47.6193757" long="6.1529374" />
             <CityCard city="Lille" lat="47.6193757" long="6.1529374" />
