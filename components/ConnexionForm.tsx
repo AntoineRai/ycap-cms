@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Adresse-mail invalide" }),
-  password: z.string().min(0, {
+  password: z.string().min(4, {
     message: "Le mot de passe ne peut pas être vide",
   }),
 });
@@ -63,7 +63,9 @@ export function ConnexionForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Connexion</Button>
+          <Button type="submit" className="w-full rounded-full">
+            Connexion
+          </Button>
       </form>
     </Form>
   );
