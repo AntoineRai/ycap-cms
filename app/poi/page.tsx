@@ -7,6 +7,9 @@ import CityCardFull from "@/components/CityCardFull";
 import POICard from "@/components/POICard";
 import Link from "next/link";
 import Deconnexion from "@/components/Logout";
+import OverlayDeletePOI from "@/components/OverlayDeletePOI";
+import { POI } from "@/entity/POI";
+import { City } from "@/entity/City";
 
 const Page = () => {
   const searchParams = useSearchParams();
@@ -14,8 +17,10 @@ const Page = () => {
 
   const redirect = `/poi/add?id=${id}`;
 
-  const [city, setCity] = useState({});
+  const [city, setCity] = useState<City>({} as City);
   const [poi, setPoi] = useState([]);
+  const [isDisplayed, setIsDisplayed] = useState(false);
+  const [currentPOIId, setCurrentPOIId] = useState(0);
 
   useEffect(() => {
     fetch(`http://localhost:3000/cities/${id}`, {
@@ -47,6 +52,25 @@ const Page = () => {
       });
   }, []);
 
+  const handleDelete = async () => {
+    fetch(`http://localhost:3000/pois/${currentPOIId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((data) => {
+      console.log(data);
+      setIsDisplayed(false);
+      setPoi(poi.filter((poi : POI) => poi.ID !== currentPOIId));
+    });
+  };
+
+  const poppin = (id: number) => {
+    setIsDisplayed(true);
+    setCurrentPOIId(id);
+  };
+
   return (
     <main className="flex flex-col h-screen items-center justify-center">
       <Deconnexion />
@@ -73,13 +97,27 @@ const Page = () => {
               />
             </div>
             <div className="w-1/2 pl-2 flex flex-col gap-2">
-              {poi.map((poi) => (
-                <POICard key={poi.ID} name={poi.Name} id={poi.ID} />
+              {poi.map((poi : POI) => (
+                <POICard
+                  key={poi.ID}
+                  name={poi.Name}
+                  id={poi.ID}
+                  lat={poi.Latitude}
+                  long={poi.Longitude}
+                  description={poi.Description}
+                  handleDelete={poppin}
+                />
               ))}
             </div>
           </div>
         </div>
       </div>
+      {isDisplayed && (
+        <OverlayDeletePOI
+          onClose={() => setIsDisplayed(false)}
+          onDelete={handleDelete}
+        />
+      )}
     </main>
   );
 };

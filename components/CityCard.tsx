@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Home, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
-import OverlayDelete from "@/components/OverlayDelete";
 
 const CityCard = (props: any) => {
   const redirectToUpdate = `/city/update?id=${props.id}&name=${props.city}`;

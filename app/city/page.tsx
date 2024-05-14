@@ -5,8 +5,8 @@ import { CirclePlus, LogOut } from "lucide-react";
 import CityCard from "@/components/CityCard";
 import Link from "next/link";
 import Deconnexion from "@/components/Logout";
-import OverlayDelete from "@/components/OverlayDelete";
 import { City } from "@/entity/City";
+import OverlayDeleteCity from "@/components/OverlayDeleteCity";
 
 export default function Page() {
   const [cities, setCities] = useState([]);
@@ -78,7 +78,7 @@ export default function Page() {
         </div>
       </div>
       {isDisplayed && (
-        <OverlayDelete
+        <OverlayDeleteCity
           onClose={() => setIsDisplayed(false)}
           onDelete={handleDelete}
         />

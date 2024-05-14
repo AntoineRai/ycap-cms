@@ -5,12 +5,13 @@ import { LogOut } from "lucide-react";
 import { POIFormCreate } from "@/components/POIFormCreate";
 import { useSearchParams } from "next/navigation";
 import Deconnexion from "@/components/Logout";
+import { City } from "@/entity/City";
 
 const Page = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
-  const [city, setCity] = useState({});
+  const [city, setCity] = useState<City>({} as City);
 
   useEffect(() => {
     fetch(`http://localhost:3000/cities/${id}`, {
