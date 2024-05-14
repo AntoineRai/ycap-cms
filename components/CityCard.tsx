@@ -1,13 +1,33 @@
-import React from "react";
+import React, { use } from "react";
 import { Home, Pencil, Trash2 } from "lucide-react";
+import Link from "next/link";
 
-const CityCard = (props : any) => {
+const CityCard = (props: any) => {
+  const redirectToUpdate = `/city/update?id=${props.id}&name=${props.city}`;
+  const redirectToPOI = `/poi?id=${props.id}`;
+
+  const handleDelete = () => {
+    fetch(`http://localhost:3000/cities/${props.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((response) => console.log(response))
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
   return (
     <div className="flex flex-row justify-around bg-white border-2 border-black rounded-lg h-1/4 w-1/2 px-4">
       <div className="flex flex-col items-center justify-center">
-        <div className="bg-[#C2E4FF] rounded-lg p-2">
-          <Home />
-        </div>
+        <Link href={redirectToPOI}>
+          <div className="bg-[#C2E4FF] rounded-lg p-2">
+            <Home />
+          </div>
+        </Link>
       </div>
       <div className="flex flex-col items-start justify-center">
         <h1 className="font-bold">{props.city}</h1>
@@ -16,8 +36,10 @@ const CityCard = (props : any) => {
         <p className="text-sm">Rayon: {props.range}</p>
       </div>
       <div className="flex flex-col items-center justify-around">
-        <Pencil />
-        <Trash2 />
+        <Link href={redirectToUpdate}>
+          <Pencil />
+        </Link>
+        <Trash2 onClick={handleDelete} />
       </div>
     </div>
   );

@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import { useRouter } from "next/navigation";
+
 const formSchema = z.object({
   name: z.string().min(1, { message: "Le nom de la ville est requis" }),
   lat: z.string().min(1, { message: "La latitude est requise" }),
@@ -29,7 +31,10 @@ const formSchema = z.object({
   ),
 });
 
-const CityFormUpdate = (id: any) => {
+const CityFormUpdate = (props: any) => {
+
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,8 +46,25 @@ const CityFormUpdate = (id: any) => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(id)
-    console.log(values);
+    fetch(`http://localhost:3000/cities/${props.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify({
+        id: props.id,
+        CityName: values.name,
+        Latitude: values.lat,
+        Longitude: values.long,
+        Reach: values.range,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        router.push("/city")
+      });
   }
 
   return (

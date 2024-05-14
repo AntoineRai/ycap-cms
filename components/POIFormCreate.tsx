@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Le nom du quartier est requis" }),
@@ -24,6 +25,9 @@ const formSchema = z.object({
 });
 
 export function POIFormCreate(id : any) {
+
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,8 +39,29 @@ export function POIFormCreate(id : any) {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(id);
-    console.log(values);
+    fetch("http://localhost:3000/pois/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify({
+        CityId: id.id,
+        Name: values.name,
+        Latitude: values.lat,
+        Longitude: values.long,
+        Description: values.description,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        router.push(`/poi?id=${id.id}`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
   }
 
   return (
@@ -93,7 +118,7 @@ export function POIFormCreate(id : any) {
           )}
         />
         <Button type="submit" className="rounded-full w-1/2">
-          Ajouter une ville 
+          Ajouter un POI 
         </Button>
       </form>
     </Form>

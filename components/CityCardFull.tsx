@@ -13,11 +13,7 @@ const CityCardFull = (props : any) => {
         <h1 className="font-bold">{props.city}</h1>
         <p className="text-sm">Latitude: {props.lat}</p>
         <p className="text-sm">Longitude: {props.long}</p>
-        <p className="text-sm">Longitude: {props.range}</p>
-      </div>
-      <div className="flex flex-col items-center justify-around">
-        <Pencil />
-        <Trash2 />
+        <p className="text-sm">Rayon: {props.range}</p>
       </div>
     </div>
   );

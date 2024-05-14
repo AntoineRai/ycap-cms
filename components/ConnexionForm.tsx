@@ -5,7 +5,6 @@ import React from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,6 +14,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Adresse-mail invalide" }),
@@ -24,6 +25,9 @@ const formSchema = z.object({
 });
 
 export function ConnexionForm() {
+
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,7 +37,23 @@ export function ConnexionForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    axios
+      .post("http://localhost:3000/user/login", {
+        Mail: values.email,
+        Password: values.password,
+      })
+      .then((response) => {
+        console.log(response)
+        console.log(values)
+        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
+        if (response.status === 200) {
+          router.push("/city");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   return (
@@ -63,9 +83,9 @@ export function ConnexionForm() {
             </FormItem>
           )}
         />
-          <Button type="submit" className="w-full rounded-full">
-            Connexion
-          </Button>
+        <Button type="submit" className="w-full rounded-full">
+          Connexion
+        </Button>
       </form>
     </Form>
   );

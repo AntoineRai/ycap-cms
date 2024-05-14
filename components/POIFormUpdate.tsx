@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,15 +15,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Le nom du quartier est requis" }),
   lat: z.string().min(1, { message: "La latitude est requise" }),
   long: z.string().min(1, { message: "La longitude est requise" }),
-  description: z.string().min(1, { message: "La description est requise" })
+  description: z.string().min(1, { message: "La description est requise" }),
 });
 
 const POIFormUpdate = (id: any) => {
+
+  const router = useRouter();
+  let redirect = "/city";
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,8 +40,25 @@ const POIFormUpdate = (id: any) => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(id)
-    console.log(values);
+    fetch(`http://localhost:3000/pois/${id.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify({
+        id: id,
+        Name: values.name,
+        Latitude: values.lat,
+        Longitude: values.long,
+        Description: values.description,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        router.push(redirect);
+      });
   }
 
   return (
