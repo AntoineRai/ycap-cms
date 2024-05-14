@@ -1,7 +1,7 @@
 import React from "react";
 import { LogOut } from "lucide-react";
 import { CityFormCreate } from "@/components/CityFormCreate";
-import Deconnexion from "@/components/Deconnexion";
+import Deconnexion from "@/components/Logout";
 
 const Page = () => {
   return (

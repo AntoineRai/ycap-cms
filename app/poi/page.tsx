@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import CityCardFull from "@/components/CityCardFull";
 import POICard from "@/components/POICard";
 import Link from "next/link";
-import Deconnexion from "@/components/Deconnexion";
+import Deconnexion from "@/components/Logout";
 
 const Page = () => {
   const searchParams = useSearchParams();

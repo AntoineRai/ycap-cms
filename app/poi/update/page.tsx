@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { LogOut } from "lucide-react";
 import POIFormUpdate from "@/components/POIFormUpdate";
-import Deconnexion from "@/components/Deconnexion";
+import Deconnexion from "@/components/Logout";
 
 const Page = () => {
   const searchParams = useSearchParams();

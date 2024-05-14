@@ -1,13 +1,17 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { CirclePlus, LogOut } from "lucide-react";
 import CityCard from "@/components/CityCard";
 import Link from "next/link";
-import Deconnexion from "@/components/Deconnexion";
+import Deconnexion from "@/components/Logout";
+import OverlayDelete from "@/components/OverlayDelete";
+import { City } from "@/entity/City";
 
 export default function Page() {
-  const [cities, setCities] = React.useState([]);
+  const [cities, setCities] = useState([]);
+  const [isDisplayed, setIsDisplayed] = useState(false);
+  const [currentCityId, setCurrentCityId] = useState(0);
 
   useEffect(() => {
     fetch("http://localhost:3000/cities", {
@@ -24,6 +28,26 @@ export default function Page() {
       });
   }, []);
 
+  const handleDelete = async () => {
+    fetch(`http://localhost:3000/cities/${currentCityId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((data) => {
+        console.log(data);
+        setIsDisplayed(false);
+        setCities(cities.filter((city : City) => city.ID !== currentCityId));
+      });
+  }
+
+  const poppin = (id : number) => {
+    setIsDisplayed(true);
+    setCurrentCityId(id);
+  }
+
   return (
     <main className="flex flex-col h-screen items-center justify-center">
       <Deconnexion />
@@ -39,7 +63,7 @@ export default function Page() {
             </Link>
           </div>
           <div className="flex flex-col flex-wrap gap-2 h-4/5">
-            {cities.map((city) => (
+            {cities.map((city : City) => (
                 <CityCard
                   id={city.ID}
                   city={city.CityName}
@@ -47,11 +71,18 @@ export default function Page() {
                   long={city.Longitude}
                   range={city.Reach}
                   key={city.ID}
+                  handleDelete={poppin}
                 />
             ))}
           </div>
         </div>
       </div>
+      {isDisplayed && (
+        <OverlayDelete
+          onClose={() => setIsDisplayed(false)}
+          onDelete={handleDelete}
+        />
+      )}
     </main>
   );
 }

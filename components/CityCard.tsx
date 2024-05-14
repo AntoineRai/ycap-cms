@@ -1,27 +1,14 @@
-import React, { use } from "react";
+import React, { useState } from "react";
 import { Home, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
+import OverlayDelete from "@/components/OverlayDelete";
 
 const CityCard = (props: any) => {
   const redirectToUpdate = `/city/update?id=${props.id}&name=${props.city}`;
   const redirectToPOI = `/poi?id=${props.id}`;
 
-  const handleDelete = () => {
-    fetch(`http://localhost:3000/cities/${props.id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((response) => console.log(response))
-      .then((data) => {
-        console.log(data);
-      });
-  };
-
   return (
-    <div className="flex flex-row justify-around bg-white border-2 border-black rounded-lg h-1/4 w-1/2 px-4">
+    <div className="flex flex-row justify-around bg-white border-2 border-black rounded-lg min-h-[100px] w-1/2 px-4">
       <div className="flex flex-col items-center justify-center">
         <Link href={redirectToPOI}>
           <div className="bg-[#C2E4FF] rounded-lg p-2">
@@ -39,7 +26,7 @@ const CityCard = (props: any) => {
         <Link href={redirectToUpdate}>
           <Pencil />
         </Link>
-        <Trash2 onClick={handleDelete} />
+        <Trash2 onClick={() => props.handleDelete(props.id)} />
       </div>
     </div>
   );
