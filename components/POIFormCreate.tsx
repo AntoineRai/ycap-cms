@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Le nom du quartier est requis" }),
@@ -111,7 +112,7 @@ export function POIFormCreate(id : any) {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input type="text" placeholder="Description" {...field} className="w-1/2"/>
+                <Textarea placeholder="Description" {...field} className="w-1/2 max-h-[200px]"/>
               </FormControl>
               <FormMessage />
             </FormItem>

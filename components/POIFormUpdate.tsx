@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { Textarea } from "./ui/textarea";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Le nom du quartier est requis" }),
@@ -113,11 +114,10 @@ const POIFormUpdate = (id: any) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input
-                  type="text"
+                <Textarea
                   placeholder="Description"
                   {...field}
-                  className="w-1/2"
+                  className="w-1/2 max-h-[200px]"
                 />
               </FormControl>
               <FormMessage />
