@@ -38,7 +38,7 @@ const Page = () => {
   }, [searchParams]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/pois/bycity/${searchParams.get("id")}`, {
+    fetch(`https://chasseauxportails-ws-dev.bcd.tech/pois/bycity/${searchParams.get("id")}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const Page = () => {
   }, [searchParams]);
 
   const handleDelete = async () => {
-    fetch(`http://localhost:3000/pois/${currentPOIId}`, {
+    fetch(`https://chasseauxportails-ws-dev.bcd.tech/pois/${currentPOIId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
