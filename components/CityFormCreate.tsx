@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
+import { CSR } from "@/config/CSR";
 
 
 const formSchema = z.object({
@@ -50,7 +51,7 @@ export function CityFormCreate() {
     const longitude = Number(values.long);
     const reach = Number(values.range);
 
-    fetch(`${process.env.NEXT_API_URL}/cities`, {
+    fetch(`${CSR}/cities`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

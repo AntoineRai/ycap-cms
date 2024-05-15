@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { CSR } from "@/config/CSR";
 
 import { useRouter } from "next/navigation";
 
@@ -50,7 +51,7 @@ const CityFormUpdate = (props: any) => {
     const longitude = Number(values.long);
     const reach = Number(values.range);
 
-    fetch(`${process.env.NEXT_API_URL}/cities/${props.id}`, {
+    fetch(`${CSR}/cities/${props.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

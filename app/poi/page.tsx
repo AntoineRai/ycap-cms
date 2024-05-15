@@ -11,6 +11,7 @@ import OverlayDeletePOI from "@/components/OverlayDeletePOI";
 import { POI } from "@/entity/POI";
 import { City } from "@/entity/City";
 import { Suspense } from "react";
+import { CSR } from "@/config/CSR";
 
 const Page = () => {
   const searchParams = useSearchParams();
@@ -23,7 +24,7 @@ const Page = () => {
   const [currentPOIId, setCurrentPOIId] = useState(0);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_API_URL}/cities/${searchParams.get("id")}`, {
+    fetch(`${CSR}/cities/${searchParams.get("id")}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +39,7 @@ const Page = () => {
   }, [searchParams]);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_API_URL}/pois/bycity/${searchParams.get("id")}`, {
+    fetch(`${CSR}/pois/bycity/${searchParams.get("id")}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +54,7 @@ const Page = () => {
   }, [searchParams]);
 
   const handleDelete = async () => {
-    fetch(`${process.env.NEXT_API_URL}/pois/${currentPOIId}`, {
+    fetch(`${CSR}/pois/${currentPOIId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

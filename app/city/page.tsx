@@ -7,6 +7,7 @@ import Link from "next/link";
 import Deconnexion from "@/components/Logout";
 import { City } from "@/entity/City";
 import OverlayDeleteCity from "@/components/OverlayDeleteCity";
+import { CSR } from "@/config/CSR";
 
 export default function Page() {
   const [cities, setCities] = useState([]);
@@ -14,7 +15,7 @@ export default function Page() {
   const [currentCityId, setCurrentCityId] = useState(0);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_API_URL}/cities`, {
+    fetch(`${CSR}/cities`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +30,7 @@ export default function Page() {
   }, []);
 
   const handleDelete = async () => {
-    fetch(`${process.env.NEXT_API_URL}/cities/${currentCityId}`, {
+    fetch(`${CSR}/cities/${currentCityId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

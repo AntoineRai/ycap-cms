@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { Textarea } from "./ui/textarea";
+import { CSR } from "@/config/CSR";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Le nom du quartier est requis" }),
@@ -43,7 +44,7 @@ const POIFormUpdate = (id: any) => {
     const latitude = Number(values.lat);
     const longitude = Number(values.long);
 
-    fetch(`${process.env.NEXT_API_URL}/pois/${id.id}`, {
+    fetch(`${CSR}/pois/${id.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

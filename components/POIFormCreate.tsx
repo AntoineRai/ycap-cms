@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
+import { CSR } from "@/config/CSR";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Le nom du quartier est requis" }),
@@ -43,7 +44,7 @@ export function POIFormCreate(id : any) {
     const latitude = Number(values.lat);
     const longitude = Number(values.long);
 
-    fetch(`${process.env.NEXT_API_URL}/pois/`, {
+    fetch(`${CSR}/pois/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
