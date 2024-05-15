@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { CSR } from "@/config/CSR";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Adresse-mail invalide" }),
@@ -38,7 +39,7 @@ export function ConnexionForm() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     axios
-      .post(`${process.env.NEXT_API_URL}/user/login`, {
+      .post(`${CSR}/user/login`, {
         Mail: values.email,
         Password: values.password,
       })
