@@ -46,6 +46,10 @@ export function CityFormCreate() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    const latitude = Number(values.lat);
+    const longitude = Number(values.long);
+    const reach = Number(values.range);
+
     fetch("https://chasseauxportails-ws-dev.bcd.tech/cities", {
       method: "POST",
       headers: {
