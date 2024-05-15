@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { LogOut } from "lucide-react";
 import { POIFormCreate } from "@/components/POIFormCreate";
 import { useSearchParams } from "next/navigation";
@@ -9,12 +9,11 @@ import { City } from "@/entity/City";
 
 const Page = () => {
   const searchParams = useSearchParams();
-  const id = searchParams.get("id");
 
   const [city, setCity] = useState<City>({} as City);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/cities/${id}`, {
+    fetch(`http://localhost:3000/cities/${searchParams.get("id")}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +25,7 @@ const Page = () => {
         setCity(data);
         console.log(data);
       });
-  }, []);
+  }, [searchParams]);
 
   return (
     <main className="flex flex-col h-screen items-center justify-center">
@@ -37,9 +36,11 @@ const Page = () => {
             Ajouter un POI - {city.CityName}
           </h1>
         </div>
-        <div className="flex flex-row w-4/5">
-          <POIFormCreate id={id} />
-        </div>
+        <Suspense>
+          <div className="flex flex-row w-4/5">
+            <POIFormCreate id={searchParams.get("id")} />
+          </div>
+        </Suspense>
       </div>
     </main>
   );

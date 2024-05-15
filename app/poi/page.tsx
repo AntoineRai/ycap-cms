@@ -10,12 +10,12 @@ import Deconnexion from "@/components/Logout";
 import OverlayDeletePOI from "@/components/OverlayDeletePOI";
 import { POI } from "@/entity/POI";
 import { City } from "@/entity/City";
+import { Suspense } from "react";
 
 const Page = () => {
   const searchParams = useSearchParams();
-  const id = searchParams.get("id");
 
-  const redirect = `/poi/add?id=${id}`;
+  const redirect = `/poi/add?id=${searchParams.get("id")}`;
 
   const [city, setCity] = useState<City>({} as City);
   const [poi, setPoi] = useState([]);
@@ -23,7 +23,7 @@ const Page = () => {
   const [currentPOIId, setCurrentPOIId] = useState(0);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/cities/${id}`, {
+    fetch(`http://localhost:3000/cities/${searchParams.get("id")}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -35,10 +35,10 @@ const Page = () => {
         setCity(data);
         console.log(data);
       });
-  }, []);
+  }, [searchParams]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/pois/bycity/${id}`, {
+    fetch(`http://localhost:3000/pois/bycity/${searchParams.get("id")}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ const Page = () => {
         setPoi(data);
         console.log(data);
       });
-  }, []);
+  }, [searchParams]);
 
   const handleDelete = async () => {
     fetch(`http://localhost:3000/pois/${currentPOIId}`, {
@@ -62,7 +62,7 @@ const Page = () => {
     }).then((data) => {
       console.log(data);
       setIsDisplayed(false);
-      setPoi(poi.filter((poi : POI) => poi.ID !== currentPOIId));
+      setPoi(poi.filter((poi: POI) => poi.ID !== currentPOIId));
     });
   };
 
@@ -96,19 +96,21 @@ const Page = () => {
                 range={city.Reach}
               />
             </div>
-            <div className="w-1/2 pl-2 flex flex-col gap-2">
-              {poi.map((poi : POI) => (
-                <POICard
-                  key={poi.ID}
-                  name={poi.Name}
-                  id={poi.ID}
-                  lat={poi.Latitude}
-                  long={poi.Longitude}
-                  description={poi.Description}
-                  handleDelete={poppin}
-                />
-              ))}
-            </div>
+            <Suspense>
+              <div className="w-1/2 pl-2 flex flex-col gap-2">
+                {poi?.map((poi: POI) => (
+                  <POICard
+                    key={poi.ID}
+                    name={poi.Name}
+                    id={poi.ID}
+                    lat={poi.Latitude}
+                    long={poi.Longitude}
+                    description={poi.Description}
+                    handleDelete={poppin}
+                  />
+                ))}
+              </div>
+            </Suspense>
           </div>
         </div>
       </div>
