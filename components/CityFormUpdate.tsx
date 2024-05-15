@@ -23,8 +23,8 @@ import { isExpired } from "@/utils/jwt";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Le nom de la ville est requis" }),
-  lat: z.number(),
-  long: z.number(),
+  lat: z.string().min(1, { message: "La latitude est requise" }),
+  long: z.string().min(1, { message: "La longitude est requise" }),
   range: z.string().refine(
     (value) => {
       const range = parseFloat(value);
@@ -42,8 +42,8 @@ const CityFormUpdate = (props: any) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      lat: 0,
-      long: 0,
+      lat: "",
+      long: "",
       range: "",
     },
   });
