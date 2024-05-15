@@ -14,7 +14,7 @@ export default function Page() {
   const [currentCityId, setCurrentCityId] = useState(0);
 
   useEffect(() => {
-    fetch("https://chasseauxportails-ws-dev.bcd.tech/cities", {
+    fetch(`${process.env.NEXT_API_URL}/cities`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export default function Page() {
   }, []);
 
   const handleDelete = async () => {
-    fetch(`https://chasseauxportails-ws-dev.bcd.tech/cities/${currentCityId}`, {
+    fetch(`${process.env.NEXT_API_URL}/cities/${currentCityId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

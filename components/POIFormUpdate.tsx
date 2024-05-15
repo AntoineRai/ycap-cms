@@ -43,7 +43,7 @@ const POIFormUpdate = (id: any) => {
     const latitude = Number(values.lat);
     const longitude = Number(values.long);
 
-    fetch(`https://chasseauxportails-ws-dev.bcd.tech/pois/${id.id}`, {
+    fetch(`${process.env.NEXT_API_URL}/pois/${id.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

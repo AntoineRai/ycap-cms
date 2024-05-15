@@ -50,7 +50,7 @@ export function CityFormCreate() {
     const longitude = Number(values.long);
     const reach = Number(values.range);
 
-    fetch("https://chasseauxportails-ws-dev.bcd.tech/cities", {
+    fetch(`${process.env.NEXT_API_URL}/cities`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

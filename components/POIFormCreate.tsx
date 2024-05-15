@@ -43,7 +43,7 @@ export function POIFormCreate(id : any) {
     const latitude = Number(values.lat);
     const longitude = Number(values.long);
 
-    fetch("https://chasseauxportails-ws-dev.bcd.tech/pois/", {
+    fetch(`${process.env.NEXT_API_URL}/pois/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

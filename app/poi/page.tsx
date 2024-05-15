@@ -23,7 +23,7 @@ const Page = () => {
   const [currentPOIId, setCurrentPOIId] = useState(0);
 
   useEffect(() => {
-    fetch(`https://chasseauxportails-ws-dev.bcd.tech/cities/${searchParams.get("id")}`, {
+    fetch(`${process.env.NEXT_API_URL}/cities/${searchParams.get("id")}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +38,7 @@ const Page = () => {
   }, [searchParams]);
 
   useEffect(() => {
-    fetch(`https://chasseauxportails-ws-dev.bcd.tech/pois/bycity/${searchParams.get("id")}`, {
+    fetch(`${process.env.NEXT_API_URL}/pois/bycity/${searchParams.get("id")}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const Page = () => {
   }, [searchParams]);
 
   const handleDelete = async () => {
-    fetch(`https://chasseauxportails-ws-dev.bcd.tech/pois/${currentPOIId}`, {
+    fetch(`${process.env.NEXT_API_URL}/pois/${currentPOIId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

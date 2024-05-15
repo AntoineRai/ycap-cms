@@ -50,7 +50,7 @@ const CityFormUpdate = (props: any) => {
     const longitude = Number(values.long);
     const reach = Number(values.range);
 
-    fetch(`https://chasseauxportails-ws-dev.bcd.tech/cities/${props.id}`, {
+    fetch(`${process.env.NEXT_API_URL}/cities/${props.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -13,7 +13,7 @@ const Page = () => {
   const [city, setCity] = useState<City>({} as City);
 
   useEffect(() => {
-    fetch(`https://chasseauxportails-ws-dev.bcd.tech/cities/${searchParams.get("id")}`, {
+    fetch(`${process.env.NEXT_API_URL}/cities/${searchParams.get("id")}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
