@@ -19,6 +19,8 @@ import { CSR } from "@/config/CSR";
 
 import { useRouter } from "next/navigation";
 
+import { isExpired } from "@/utils/jwt";
+
 const formSchema = z.object({
   name: z.string().min(1, { message: "Le nom de la ville est requis" }),
   lat: z.number(),
@@ -50,6 +52,8 @@ const CityFormUpdate = (props: any) => {
     const latitude = Number(values.lat);
     const longitude = Number(values.long);
     const reach = Number(values.range);
+
+    isExpired(localStorage.getItem("accessToken"), localStorage.getItem("refreshToken"))
 
     fetch(`${CSR}/cities/${props.id}`, {
       method: "PUT",

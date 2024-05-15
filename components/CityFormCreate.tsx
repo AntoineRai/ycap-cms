@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
 import { CSR } from "@/config/CSR";
+import { isExpired } from "@/utils/jwt";
 
 
 const formSchema = z.object({
@@ -50,6 +51,8 @@ export function CityFormCreate() {
     const latitude = Number(values.lat);
     const longitude = Number(values.long);
     const reach = Number(values.range);
+
+    isExpired(localStorage.getItem("accessToken"), localStorage.getItem("refreshToken"))
 
     fetch(`${CSR}/cities`, {
       method: "POST",

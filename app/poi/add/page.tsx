@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import Deconnexion from "@/components/Logout";
 import { City } from "@/entity/City";
 import { CSR } from "@/config/CSR";
+import { isExpired } from "@/utils/jwt";
 
 const Page = () => {
   const searchParams = useSearchParams();
@@ -14,6 +15,7 @@ const Page = () => {
   const [city, setCity] = useState<City>({} as City);
 
   useEffect(() => {
+    isExpired(localStorage.getItem("accessToken"), localStorage.getItem("refreshToken"))
     fetch(`${CSR}/cities/${searchParams.get("id")}`, {
       method: "GET",
       headers: {

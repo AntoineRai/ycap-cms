@@ -8,6 +8,7 @@ import Deconnexion from "@/components/Logout";
 import { City } from "@/entity/City";
 import OverlayDeleteCity from "@/components/OverlayDeleteCity";
 import { CSR } from "@/config/CSR";
+import { isExpired } from "@/utils/jwt";
 
 export default function Page() {
   const [cities, setCities] = useState([]);
@@ -15,6 +16,7 @@ export default function Page() {
   const [currentCityId, setCurrentCityId] = useState(0);
 
   useEffect(() => {
+    isExpired(localStorage.getItem("accessToken"), localStorage.getItem("refreshToken"));
     fetch(`${CSR}/cities`, {
       method: "GET",
       headers: {
@@ -30,6 +32,7 @@ export default function Page() {
   }, []);
 
   const handleDelete = async () => {
+    isExpired(localStorage.getItem("accessToken"), localStorage.getItem("refreshToken"))
     fetch(`${CSR}/cities/${currentCityId}`, {
       method: "DELETE",
       headers: {

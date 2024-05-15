@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { Textarea } from "./ui/textarea";
 import { CSR } from "@/config/CSR";
+import { isExpired } from "@/utils/jwt";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Le nom du quartier est requis" }),
@@ -43,6 +44,8 @@ const POIFormUpdate = (id: any) => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     const latitude = Number(values.lat);
     const longitude = Number(values.long);
+
+    isExpired(localStorage.getItem("accessToken"), localStorage.getItem("refreshToken"))
 
     fetch(`${CSR}/pois/${id.id}`, {
       method: "PUT",

@@ -12,6 +12,7 @@ import { POI } from "@/entity/POI";
 import { City } from "@/entity/City";
 import { Suspense } from "react";
 import { CSR } from "@/config/CSR";
+import { isExpired } from "@/utils/jwt";
 
 const Page = () => {
   const searchParams = useSearchParams();
@@ -24,6 +25,7 @@ const Page = () => {
   const [currentPOIId, setCurrentPOIId] = useState(0);
 
   useEffect(() => {
+    isExpired(localStorage.getItem("accessToken"), localStorage.getItem("refreshToken"))
     fetch(`${CSR}/cities/${searchParams.get("id")}`, {
       method: "GET",
       headers: {
@@ -39,6 +41,7 @@ const Page = () => {
   }, [searchParams]);
 
   useEffect(() => {
+    isExpired(localStorage.getItem("accessToken"), localStorage.getItem("refreshToken"))
     fetch(`${CSR}/pois/bycity/${searchParams.get("id")}`, {
       method: "GET",
       headers: {
@@ -54,6 +57,7 @@ const Page = () => {
   }, [searchParams]);
 
   const handleDelete = async () => {
+    isExpired(localStorage.getItem("accessToken"), localStorage.getItem("refreshToken"))
     fetch(`${CSR}/pois/${currentPOIId}`, {
       method: "DELETE",
       headers: {
