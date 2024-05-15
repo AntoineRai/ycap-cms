@@ -58,9 +58,9 @@ export function CityFormCreate() {
       },
       body: JSON.stringify({
         CityName: values.name,
-        Latitude: values.lat,
-        Longitude: values.long,
-        Reach: values.range,
+        Latitude: latitude,
+        Longitude: longitude,
+        Reach: reach,
       }),
     })
       .then((response) => response.json())
