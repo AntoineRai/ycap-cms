@@ -93,7 +93,7 @@ const Page = () => {
             </Link>
           </div>
           <div className="flex flex-row h-4/5 w-full">
-            <div className="w-1/2">
+            <div className="w-full">
               <CityCard
                 city={city.CityName}
                 lat={city.Latitude}
