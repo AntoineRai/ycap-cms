@@ -132,7 +132,7 @@ export function CityFormCreate() {
               <FormControl>
                 <Input
                   type="text"
-                  placeholder="Range"
+                  placeholder="Rayon"
                   {...field}
                   className="w-1/2"
                 />

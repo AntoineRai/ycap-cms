@@ -13,7 +13,7 @@ const CityCardFull = (props : any) => {
         <h1 className="font-bold">{props.city}</h1>
         <p className="text-sm">Latitude: {props.lat}</p>
         <p className="text-sm">Longitude: {props.long}</p>
-        <p className="text-sm">Rayon: {props.range}</p>
+        <p className="text-sm">Rayon: {props.range} km</p>
       </div>
     </div>
   );

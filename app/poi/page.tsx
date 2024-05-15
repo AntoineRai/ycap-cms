@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { LogOut, CirclePlus } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import CityCardFull from "@/components/CityCardFull";
+import CityCard from "@/components/CityCard";
 import POICard from "@/components/POICard";
 import Link from "next/link";
 import Deconnexion from "@/components/Logout";
@@ -94,7 +94,7 @@ const Page = () => {
           </div>
           <div className="flex flex-row h-4/5 w-full">
             <div className="w-1/2">
-              <CityCardFull
+              <CityCard
                 city={city.CityName}
                 lat={city.Latitude}
                 long={city.Longitude}
