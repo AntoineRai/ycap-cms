@@ -29,7 +29,7 @@ export default function Page() {
   }, []);
 
   const handleDelete = async () => {
-    fetch(`http://localhost:3000/cities/${currentCityId}`, {
+    fetch(`https://chasseauxportails-ws-dev.bcd.tech/cities/${currentCityId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

@@ -46,6 +46,10 @@ const CityFormUpdate = (props: any) => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    const latitude = Number(values.lat);
+    const longitude = Number(values.long);
+    const reach = Number(values.range);
+
     fetch(`https://chasseauxportails-ws-dev.bcd.tech/cities/${props.id}`, {
       method: "PUT",
       headers: {
@@ -55,9 +59,9 @@ const CityFormUpdate = (props: any) => {
       body: JSON.stringify({
         id: props.id,
         CityName: values.name,
-        Latitude: values.lat,
-        Longitude: values.long,
-        Reach: values.range,
+        Latitude: latitude,
+        Longitude: longitude,
+        Reach: reach,
       }),
     })
       .then((response) => response.json())

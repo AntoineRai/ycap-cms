@@ -26,7 +26,6 @@ const formSchema = z.object({
 });
 
 const POIFormUpdate = (id: any) => {
-
   const router = useRouter();
   let redirect = "/city";
 
@@ -41,6 +40,9 @@ const POIFormUpdate = (id: any) => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    const latitude = Number(values.lat);
+    const longitude = Number(values.long);
+
     fetch(`https://chasseauxportails-ws-dev.bcd.tech/pois/${id.id}`, {
       method: "PUT",
       headers: {
@@ -50,8 +52,8 @@ const POIFormUpdate = (id: any) => {
       body: JSON.stringify({
         id: id,
         Name: values.name,
-        Latitude: values.lat,
-        Longitude: values.long,
+        Latitude: latitude,
+        Longitude: longitude,
         Description: values.description,
       }),
     })

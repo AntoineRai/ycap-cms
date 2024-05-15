@@ -40,6 +40,9 @@ export function POIFormCreate(id : any) {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    const latitude = Number(values.lat);
+    const longitude = Number(values.long);
+
     fetch("https://chasseauxportails-ws-dev.bcd.tech/pois/", {
       method: "POST",
       headers: {
@@ -49,8 +52,8 @@ export function POIFormCreate(id : any) {
       body: JSON.stringify({
         CityId: id.id,
         Name: values.name,
-        Latitude: values.lat,
-        Longitude: values.long,
+        Latitude: latitude,
+        Longitude: longitude,
         Description: values.description,
       }),
     })
