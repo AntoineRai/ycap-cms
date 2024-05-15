@@ -14,7 +14,7 @@ export default function Page() {
   const [currentCityId, setCurrentCityId] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:3000/cities", {
+    fetch("https://chasseauxportails-ws-dev.bcd.tech/cities", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
