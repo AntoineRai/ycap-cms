@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { LogOut, CirclePlus } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import CityCard from "@/components/CityCard";
+import CityCardFull from "@/components/CityCardFull";
 import POICard from "@/components/POICard";
 import Link from "next/link";
 import Deconnexion from "@/components/Logout";
@@ -25,7 +25,10 @@ const Page = () => {
   const [currentPOIId, setCurrentPOIId] = useState(0);
 
   useEffect(() => {
-    isExpired(localStorage.getItem("accessToken"), localStorage.getItem("refreshToken"))
+    isExpired(
+      localStorage.getItem("accessToken"),
+      localStorage.getItem("refreshToken")
+    );
     fetch(`${CSR}/cities/${searchParams.get("id")}`, {
       method: "GET",
       headers: {
@@ -41,7 +44,10 @@ const Page = () => {
   }, [searchParams]);
 
   useEffect(() => {
-    isExpired(localStorage.getItem("accessToken"), localStorage.getItem("refreshToken"))
+    isExpired(
+      localStorage.getItem("accessToken"),
+      localStorage.getItem("refreshToken")
+    );
     fetch(`${CSR}/pois/bycity/${searchParams.get("id")}`, {
       method: "GET",
       headers: {
@@ -57,7 +63,10 @@ const Page = () => {
   }, [searchParams]);
 
   const handleDelete = async () => {
-    isExpired(localStorage.getItem("accessToken"), localStorage.getItem("refreshToken"))
+    isExpired(
+      localStorage.getItem("accessToken"),
+      localStorage.getItem("refreshToken")
+    );
     fetch(`${CSR}/pois/${currentPOIId}`, {
       method: "DELETE",
       headers: {
@@ -93,8 +102,8 @@ const Page = () => {
             </Link>
           </div>
           <div className="flex flex-row h-4/5 w-full">
-            <div className="w-full">
-              <CityCard
+            <div className="w-1/2">
+              <CityCardFull
                 city={city.CityName}
                 lat={city.Latitude}
                 long={city.Longitude}
