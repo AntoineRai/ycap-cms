@@ -20,8 +20,8 @@ import { Textarea } from "./ui/textarea";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Le nom du quartier est requis" }),
-  lat: z.string().min(1, { message: "La latitude est requise" }),
-  long: z.string().min(1, { message: "La longitude est requise" }),
+  lat: z.number(),
+  long: z.number(),
   description: z.string().min(1, { message: "La description est requise" }),
 });
 
@@ -34,8 +34,8 @@ const POIFormUpdate = (id: any) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      lat: "",
-      long: "",
+      lat: 0,
+      long: 0,
       description: "",
     },
   });
