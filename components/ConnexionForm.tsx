@@ -38,7 +38,7 @@ export function ConnexionForm() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     axios
-      .post("http://localhost:3000/user/login", {
+      .post("https://chasseauxportails-ws-dev.bcd.tech/user/login", {
         Mail: values.email,
         Password: values.password,
       })

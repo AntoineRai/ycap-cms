@@ -40,7 +40,7 @@ export function POIFormCreate(id : any) {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    fetch("http://localhost:3000/pois/", {
+    fetch("https://chasseauxportails-ws-dev.bcd.tech/pois/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

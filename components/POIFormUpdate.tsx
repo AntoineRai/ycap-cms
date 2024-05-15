@@ -41,7 +41,7 @@ const POIFormUpdate = (id: any) => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    fetch(`http://localhost:3000/pois/${id.id}`, {
+    fetch(`https://chasseauxportails-ws-dev.bcd.tech/pois/${id.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

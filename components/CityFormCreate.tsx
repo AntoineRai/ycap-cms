@@ -46,7 +46,7 @@ export function CityFormCreate() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    fetch("http://localhost:3000/cities", {
+    fetch("https://chasseauxportails-ws-dev.bcd.tech/cities", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

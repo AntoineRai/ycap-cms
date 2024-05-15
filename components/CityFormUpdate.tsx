@@ -46,7 +46,7 @@ const CityFormUpdate = (props: any) => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    fetch(`http://localhost:3000/cities/${props.id}`, {
+    fetch(`https://chasseauxportails-ws-dev.bcd.tech/cities/${props.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
