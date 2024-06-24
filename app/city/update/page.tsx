@@ -2,14 +2,11 @@
 
 import React, { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { LogOut } from "lucide-react";
 import CityFormUpdate from "@/components/CityFormUpdate";
 import Deconnexion from "@/components/Logout";
-import useAuth from "@/hook/useAuth";
 
 const Page = () => {
   const searchParams = useSearchParams();
-  useAuth();
 
   return (
     <main className="flex flex-col h-screen items-center justify-center">

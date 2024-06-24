@@ -7,11 +7,9 @@ import Deconnexion from "@/components/Logout";
 import { City } from "@/entity/City";
 import { CSR } from "@/config/CSR";
 import { isExpired } from "@/utils/jwt";
-import useAuth from "@/hook/useAuth";
 
 const Page = () => {
   const searchParams = useSearchParams();
-  useAuth();
 
   const [city, setCity] = useState<City>({} as City);
 
