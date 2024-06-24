@@ -13,9 +13,11 @@ import { City } from "@/entity/City";
 import { Suspense } from "react";
 import { CSR } from "@/config/CSR";
 import { isExpired } from "@/utils/jwt";
+import useAuth from "@/hook/useAuth";
 
 const Page = () => {
   const searchParams = useSearchParams();
+  useAuth();
 
   const redirect = `/poi/add?id=${searchParams.get("id")}`;
 

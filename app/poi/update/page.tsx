@@ -4,9 +4,11 @@ import React from "react";
 import { useSearchParams } from "next/navigation";
 import POIFormUpdate from "@/components/POIFormUpdate";
 import Deconnexion from "@/components/Logout";
+import useAuth from "@/hook/useAuth";
 
 const Page = () => {
   const searchParams = useSearchParams();
+  useAuth();
 
   return (
     <main className="flex flex-col h-screen items-center justify-center">

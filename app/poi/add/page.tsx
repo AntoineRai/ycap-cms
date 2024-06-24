@@ -1,21 +1,25 @@
 "use client";
 
 import React, { useState, useEffect, Suspense } from "react";
-import { LogOut } from "lucide-react";
 import { POIFormCreate } from "@/components/POIFormCreate";
 import { useSearchParams } from "next/navigation";
 import Deconnexion from "@/components/Logout";
 import { City } from "@/entity/City";
 import { CSR } from "@/config/CSR";
 import { isExpired } from "@/utils/jwt";
+import useAuth from "@/hook/useAuth";
 
 const Page = () => {
   const searchParams = useSearchParams();
+  useAuth();
 
   const [city, setCity] = useState<City>({} as City);
 
   useEffect(() => {
-    isExpired(localStorage.getItem("accessToken"), localStorage.getItem("refreshToken"))
+    isExpired(
+      localStorage.getItem("accessToken"),
+      localStorage.getItem("refreshToken")
+    );
     fetch(`${CSR}/cities/${searchParams.get("id")}`, {
       method: "GET",
       headers: {

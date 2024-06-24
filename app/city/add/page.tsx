@@ -2,8 +2,10 @@ import React from "react";
 import { LogOut } from "lucide-react";
 import { CityFormCreate } from "@/components/CityFormCreate";
 import Deconnexion from "@/components/Logout";
+import useAuth from "@/hook/useAuth";
 
 const Page = () => {
+  useAuth();
   return (
     <main className="flex flex-col h-screen items-center justify-center">
       <Deconnexion />
