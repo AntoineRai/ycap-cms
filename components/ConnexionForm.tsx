@@ -44,8 +44,6 @@ export function ConnexionForm() {
         Password: values.password,
       })
       .then((response) => {
-        console.log(response)
-        console.log(values)
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
         if (response.status === 200) {

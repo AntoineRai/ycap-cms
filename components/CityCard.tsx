@@ -7,7 +7,7 @@ const CityCard = (props: any) => {
   const redirectToPOI = `/poi?id=${props.id}`;
 
   return (
-    <div className="flex flex-row justify-around bg-white border-2 border-black rounded-lg min-h-[100px] w-1/2 px-4">
+    <div className="flex flex-row justify-around bg-white border-2 border-black rounded-lg min-h-[100px] w-5/12 m-1">
       <div className="flex flex-col items-center justify-center">
         <Link href={redirectToPOI}>
           <div className="bg-[#C2E4FF] rounded-lg p-2">

@@ -9,6 +9,9 @@ import { City } from "@/entity/City";
 import OverlayDeleteCity from "@/components/OverlayDeleteCity";
 import { CSR } from "@/config/CSR";
 import { isExpired } from "@/utils/jwt";
+import { ScrollArea } from "@/components/ui/scroll-area"
+import MobileWarning from "@/components/MobileWarning";
+
 
 export default function Page() {
   const [cities, setCities] = useState([]);
@@ -66,7 +69,7 @@ export default function Page() {
               </div>
             </Link>
           </div>
-          <div className="flex flex-col flex-wrap gap-2 h-4/5">
+          <div className="flex flex-row flex-wrap justify-around max-h-[78%] overflow-y-scroll">
             {cities.map((city : City) => (
                 <CityCard
                   id={city.ID}
