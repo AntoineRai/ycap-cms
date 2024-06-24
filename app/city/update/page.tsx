@@ -4,6 +4,7 @@ import React, { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import CityFormUpdate from "@/components/CityFormUpdate";
 import Deconnexion from "@/components/Logout";
+import StopCity from "@/components/StopCity";
 
 const Page = () => {
   const searchParams = useSearchParams();
@@ -21,6 +22,7 @@ const Page = () => {
           </div>
         </Suspense>
       </div>
+      <StopCity />
     </main>
   );
 };

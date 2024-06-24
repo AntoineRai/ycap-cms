@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,6 +29,8 @@ export function ConnexionForm() {
 
   const router = useRouter();
 
+  const [error, setError] = useState("");
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -51,7 +53,9 @@ export function ConnexionForm() {
         }
       })
       .catch((error) => {
-        console.error(error);
+        if (error.response.status === 401) {
+          setError("E-mail ou mot de passe incorrect");
+        }
       });
   }
 
@@ -82,6 +86,7 @@ export function ConnexionForm() {
             </FormItem>
           )}
         />
+        {error && <p className="text-red-500 font-bold">{error}</p>}
         <Button type="submit" className="w-full rounded-full">
           Connexion
         </Button>

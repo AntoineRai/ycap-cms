@@ -7,6 +7,7 @@ import Deconnexion from "@/components/Logout";
 import { City } from "@/entity/City";
 import { CSR } from "@/config/CSR";
 import { isExpired } from "@/utils/jwt";
+import StopPOI from "@/components/StopPOI";
 
 const Page = () => {
   const searchParams = useSearchParams();
@@ -47,6 +48,7 @@ const Page = () => {
           </div>
         </Suspense>
       </div>
+      <StopPOI id={searchParams.get("id")}/>
     </main>
   );
 };

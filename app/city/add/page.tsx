@@ -1,7 +1,7 @@
 import React from "react";
-import { LogOut } from "lucide-react";
 import { CityFormCreate } from "@/components/CityFormCreate";
 import Deconnexion from "@/components/Logout";
+import StopCity from "@/components/StopCity";
 
 const Page = () => {
   return (
@@ -14,6 +14,9 @@ const Page = () => {
         <div className="flex flex-row w-4/5">
           <CityFormCreate />
         </div>
+      </div>
+      <div className="w-4/5 flex flex-row-reverse px-4 justify-between">
+        <StopCity />
       </div>
     </main>
   );

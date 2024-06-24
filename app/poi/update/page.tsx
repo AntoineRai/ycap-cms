@@ -4,6 +4,7 @@ import React from "react";
 import { useSearchParams } from "next/navigation";
 import POIFormUpdate from "@/components/POIFormUpdate";
 import Deconnexion from "@/components/Logout";
+import StopCity from "@/components/StopCity";
 
 const Page = () => {
   const searchParams = useSearchParams();
@@ -19,6 +20,7 @@ const Page = () => {
           <POIFormUpdate id={searchParams?.get("id") ?? ""} />
         </div>
       </div>
+      <StopCity />
     </main>
   );
 };
