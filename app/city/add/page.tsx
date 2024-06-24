@@ -1,9 +1,14 @@
+"use client"
+
 import React from "react";
 import { CityFormCreate } from "@/components/CityFormCreate";
 import Deconnexion from "@/components/Logout";
 import StopCity from "@/components/StopCity";
+import useAuth from "@/hook/useAuth";
 
 const Page = () => {
+  useAuth();
+
   return (
     <main className="flex flex-col h-screen items-center justify-center">
       <Deconnexion />

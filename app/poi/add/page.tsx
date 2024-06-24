@@ -8,8 +8,11 @@ import { City } from "@/entity/City";
 import { CSR } from "@/config/CSR";
 import { isExpired } from "@/utils/jwt";
 import StopPOI from "@/components/StopPOI";
+import useAuth from "@/hook/useAuth";
 
 const Page = () => {
+  useAuth();
+
   const searchParams = useSearchParams();
 
   const [city, setCity] = useState<City>({} as City);

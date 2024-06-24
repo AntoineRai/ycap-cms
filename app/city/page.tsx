@@ -9,14 +9,15 @@ import { City } from "@/entity/City";
 import OverlayDeleteCity from "@/components/OverlayDeleteCity";
 import { CSR } from "@/config/CSR";
 import { isExpired } from "@/utils/jwt";
-import { ScrollArea } from "@/components/ui/scroll-area"
-import MobileWarning from "@/components/MobileWarning";
+import useAuth from "@/hook/useAuth";
 
 
 export default function Page() {
   const [cities, setCities] = useState([]);
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [currentCityId, setCurrentCityId] = useState(0);
+
+  useAuth();
 
   useEffect(() => {
     isExpired(localStorage.getItem("accessToken"), localStorage.getItem("refreshToken"));

@@ -5,8 +5,11 @@ import { useSearchParams } from "next/navigation";
 import POIFormUpdate from "@/components/POIFormUpdate";
 import Deconnexion from "@/components/Logout";
 import StopCity from "@/components/StopCity";
+import useAuth from "@/hook/useAuth";
 
 const Page = () => {
+  useAuth();
+
   const searchParams = useSearchParams();
 
   return (
